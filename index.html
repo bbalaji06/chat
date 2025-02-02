@@ -17,7 +17,7 @@
       function createConnection() {
         if (!socket) {
           // Only create socket connection once
-          socket = io("https://chat-neon-kappa.vercel.app/");
+          socket = io("https://chat-production-432e.up.railway.app/");
 
           socket.on("message", (data) => {
             const messagesList = document.getElementById("messages");

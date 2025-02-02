@@ -12,12 +12,12 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://chat-neon-kappa.vercel.app/",
+    origin: "https://chat-production-432e.up.railway.app/",
   },
 });
 
 // Middleware
-app.use(cors({ origin: "https://chat-neon-kappa.vercel.app/" }));
+app.use(cors({ origin: "https://chat-production-432e.up.railway.app/" }));
 
 // Serve index.html correctly
 app.get("/", (req, res) => {
