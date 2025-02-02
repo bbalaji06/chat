@@ -3,14 +3,23 @@ import http from "http";
 import path from "path";
 import { fileURLToPath } from "url"; // Needed for ES modules
 import { Server } from 'socket.io';
-
+import cors from "cors";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+    cors: {
+      origin: "*", // Accept requests from any origin (for testing locally)
+      methods: ["GET", "POST"],
+    },
+  });
+  
+  // Middleware
+  app.use(cors({ origin: "*" }));
+
 
 // Serve index.html correctly
 app.get("/", (req, res) => {
