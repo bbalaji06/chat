@@ -1,7 +1,7 @@
 import express from "express";
 import http from "http";
 import path from "path";
-import { fileURLToPath } from "url"; // Needed for ES modules
+import { fileURLToPath } from "url";
 import { Server } from "socket.io";
 import cors from "cors";
 
