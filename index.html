@@ -6,25 +6,35 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Learning sokets.io</h1>
+    <h1>Learning Socket.io</h1>
     <input type="text" id="input" />
     <button onclick="createConnection()" id="send">Send</button>
     <ul id="messages"></ul>
+
     <script src="/socket.io/socket.io.js"></script>
+    <!-- Make sure this path is correct -->
     <script>
-      const socket = io("https://chat-neon-kappa.vercel.app/");
+      let socket;
       function createConnection() {
+        if (!socket) {
+          // Only create socket connection once
+          socket = io("https://chat-neon-kappa.vercel.app/");
+
+          socket.on("message", (data) => {
+            const messagesList = document.getElementById("messages");
+            const li = document.createElement("li");
+            li.textContent = data;
+            messagesList.appendChild(li);
+          });
+        }
+
         const input = document.getElementById("input");
         const message = input.value.trim();
-        socket.emit("message", message);
-        input.value = ""; // Clear input
+        if (message) {
+          socket.emit("message", message); // Send message to server
+          input.value = ""; // Clear input field
+        }
       }
-      socket.on("message", (data) => {
-        const messagesList = document.getElementById("messages");
-        const li = document.createElement("li");
-        li.textContent = data;
-        messagesList.appendChild(li);
-      });
     </script>
   </body>
 </html>
